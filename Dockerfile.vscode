@@ -1,0 +1,41 @@
+FROM kasmweb/core-ubuntu-jammy:1.12.0
+USER root
+
+ENV HOME /home/kasm-default-profile
+ENV STARTUPDIR /dockerstartup
+ENV TMP_SCRIPTS $STARTUPDIR/install
+WORKDIR $HOME
+
+######### Begin Installation ###########
+# Copy installation files
+COPY ./install $TMP_SCRIPTS/
+
+# Install tools
+RUN bash $TMP_SCRIPTS/tools/install.sh
+RUN bash $TMP_SCRIPTS/tools/install-smb.sh
+RUN bash $TMP_SCRIPTS/tools/install-terraform.sh
+
+# Install VS Code
+RUN bash $TMP_SCRIPTS/vs_code/install.sh
+
+# Cleanup installation files
+RUN rm -rf $TMP_SCRIPTS
+######### End Installation ###########
+
+COPY ./install/vs_code/startup.sh $STARTUPDIR/custom_startup.sh
+RUN chmod +x $STARTUPDIR/custom_startup.sh
+RUN chmod 755 $STARTUPDIR/custom_startup.sh
+
+# Update the desktop environment to be optimized for a single application
+RUN cp $HOME/.config/xfce4/xfconf/single-application-xfce-perchannel-xml/* $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/
+RUN cp /usr/share/extra/backgrounds/bg_kasm.png /usr/share/extra/backgrounds/bg_default.png
+RUN apt-get remove -y xfce4-panel
+
+RUN chown 1000:0 $HOME
+RUN $STARTUPDIR/set_user_permission.sh $HOME
+
+ENV HOME /home/kasm-user
+WORKDIR $HOME
+RUN mkdir -p $HOME && chown -R 1000:0 $HOME
+
+USER 1000
