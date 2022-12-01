@@ -28,6 +28,9 @@ RUN bash $TMP_SCRIPTS/postman/install.sh
 # Install Slack
 RUN bash $TMP_SCRIPTS/slack/install.sh
 
+# "Install" Terminal
+RUN bash $TMP_SCRIPTS/terminal/install.sh
+
 # Install VS Code
 RUN bash $TMP_SCRIPTS/vs_code/install.sh
 
