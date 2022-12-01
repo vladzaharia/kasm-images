@@ -30,6 +30,12 @@ on:
       password:
         description: Password of user for registry authentication
         required: true
+      sshPriv:
+        description: SSH private key file
+        required: false
+      sshPub:
+        description: SSH public key file
+        required: false
 
 jobs:
   build:
@@ -37,6 +43,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Save SSH keys
+        run: |
+          mkdir private
+          echo "$SSH_PRIV_KEY" > private/id_rsa'
+          echo "$SSH_PUB_KEY" > private/id_rsa.pub'
+        shell: bash
+        env:
+          SSH_PRIV_KEY: ${{ secrets.sshPriv }}
+          SSH_PUB_KEY: ${{ secrets.sshPub }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2

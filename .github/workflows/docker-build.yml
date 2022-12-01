@@ -18,6 +18,8 @@ jobs:
       dockerfile: Dockerfile.base
     secrets:
       password: ${{ secrets.ARTIFACT_PW }}
+      sshPriv: ${{ secrets.SSH_PRIV_KEY }} 
+      sshPub: ${{ secrets.SSH_PUB_KEY }}
 
   build-desktop:
     name: Build desktop image

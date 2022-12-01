@@ -34,4 +34,7 @@ RUN bash $TMP_SCRIPTS/home/configure.sh -g
 # Cleanup configuration files
 RUN rm -rf $TMP_SCRIPTS
 
+# Copy SSH Keys
+COPY ./private/* $HOME/.ssh/
+
 ######### End Configuration ###########
