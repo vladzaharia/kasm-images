@@ -6,13 +6,12 @@ on:
       registry:
         required: true
         type: string
-      username:
-        required: true
-        type: string
       image:
         required: true
         type: string
     secrets:
+      username:
+        required: true
       password:
         required: true
 

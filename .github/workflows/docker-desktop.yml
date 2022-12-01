@@ -14,7 +14,7 @@ jobs:
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     with:
       registry: docker.zhr.one
-      username: ${{ secrets.ARTIFACT_USER }}
       image: personal-desktop
     secrets:
+      username: ${{ secrets.ARTIFACT_USER }}
       password: ${{ secrets.ARTIFACT_PW }}
