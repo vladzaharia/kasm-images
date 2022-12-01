@@ -6,7 +6,7 @@ COPY ./install $TMP_SCRIPTS/
 
 # Install VS Code
 RUN bash $TMP_SCRIPTS/vs_code/install.sh
-COPY ./install/vs_code/custom_startup.sh $STARTUPDIR/custom_startup.sh
+COPY ./install/vs_code/startup.sh $STARTUPDIR/custom_startup.sh
 RUN chmod 755 $STARTUPDIR/custom_startup.sh
 
 # Cleanup installation files
