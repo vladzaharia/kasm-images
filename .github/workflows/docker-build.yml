@@ -21,6 +21,16 @@ jobs:
       sshPriv: ${{ secrets.SSH_PRIV_KEY }} 
       sshPub: ${{ secrets.SSH_PUB_KEY }}
 
+  build-base-app:
+    name: Build base-app image
+    uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
+    needs: build-base
+    with:
+      image: kasm/base-app
+      dockerfile: Dockerfile.base-app
+    secrets:
+      password: ${{ secrets.ARTIFACT_PW }}
+
   build-desktop:
     name: Build desktop image
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
@@ -34,7 +44,7 @@ jobs:
   build-vscode:
     name: Build vscode image
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
-    needs: build-base
+    needs: build-base-app
     with:
       image: kasm/vscode
       dockerfile: Dockerfile.vscode

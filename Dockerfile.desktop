@@ -1,10 +1,4 @@
 FROM docker.zhr.one/kasm/base:latest
-USER root
-
-ENV HOME /home/kasm-default-profile
-ENV STARTUPDIR /dockerstartup
-ENV TMP_SCRIPTS $STARTUPDIR/tmp
-WORKDIR $HOME
 
 ######### Begin Installation ###########
 # Copy installation files

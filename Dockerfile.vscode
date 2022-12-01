@@ -1,10 +1,4 @@
-FROM docker.zhr.one/kasm/base:latest
-USER root
-
-ENV HOME /home/kasm-default-profile
-ENV STARTUPDIR /dockerstartup
-ENV TMP_SCRIPTS $STARTUPDIR/tmp
-WORKDIR $HOME
+FROM docker.zhr.one/kasm/base-app:latest
 
 ######### Begin Installation ###########
 # Copy installation files
@@ -18,11 +12,6 @@ RUN chmod 755 $STARTUPDIR/custom_startup.sh
 # Cleanup installation files
 RUN rm -rf $TMP_SCRIPTS
 ######### End Installation ###########
-
-# Update the desktop environment to be optimized for a single application
-RUN cp $HOME/.config/xfce4/xfconf/single-application-xfce-perchannel-xml/* $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/
-RUN cp /usr/share/extra/backgrounds/bg_kasm.png /usr/share/extra/backgrounds/bg_default.png
-RUN apt-get remove -y xfce4-panel
 
 RUN chown 1000:0 $HOME
 RUN $STARTUPDIR/set_user_permission.sh $HOME
