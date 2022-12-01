@@ -33,7 +33,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ${{ inputs.registry }}
-          username: ${{ inputs.username }}
+          username: ${{ secrets.username }}
           password: ${{ secrets.password }}
 
       - name: Extract Docker metadata
