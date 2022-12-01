@@ -4,19 +4,31 @@ on:
   workflow_call:
     inputs:
       registry:
-        required: true
+        description: Registry to use for authentication and pushing
+        required: false
+        default: docker.zhr.one
         type: string
       username:
-        required: true
+        description: Username of user for registry authentication
+        required: false
+        default: github
         type: string
       image:
+        description: Name of image to build and push
         required: true
         type: string
       dockerfile:
+        description: Dockerfile to build and push
         required: true
+        type: string
+      platforms:
+        description: Platforms to build images for
+        required: false
+        default: linux/arm64,linux/amd64
         type: string
     secrets:
       password:
+        description: Password of user for registry authentication
         required: true
 
 jobs:
@@ -53,7 +65,7 @@ jobs:
             type=raw,value=latest,enable={{ is_default_branch }}
             type=raw,value=testing,enable=${{ github.event_name == 'pull_request' }}
 
-      - name: Build and push Docker image
+      - name: Build ${{ inputs.image }} image
         id: build-and-push
         uses: docker/build-push-action@v3
         with:
@@ -62,6 +74,6 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/arm64,linux/amd64
+          platforms: ${{ inputs.platforms }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

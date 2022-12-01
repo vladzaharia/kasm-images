@@ -9,17 +9,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-   REGISTRY: docker.zhr.one
-   USERNAME: github
-
 jobs:
   build-base:
     name: Build base image
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     with:
-      registry: ${{ env.REGISTRY }}
-      username: ${{ env.USERNAME }}
       image: kasm/base
       dockerfile: Dockerfile.base
     secrets:
@@ -30,8 +24,6 @@ jobs:
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     needs: build-base
     with:
-      registry: ${{ env.REGISTRY }}
-      username: ${{ env.USERNAME }}
       image: kasm/desktop
       dockerfile: Dockerfile.desktop
     secrets:
