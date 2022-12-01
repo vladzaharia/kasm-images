@@ -1,4 +1,4 @@
-FROM kasmweb/core-ubuntu-jammy:1.12.0
+FROM docker.zhr.one/kasm/base:latest
 USER root
 
 ENV HOME /home/kasm-default-profile
@@ -9,11 +9,6 @@ WORKDIR $HOME
 ######### Begin Installation ###########
 # Copy installation files
 COPY ./install $TMP_SCRIPTS/
-
-# Install tools
-RUN bash $TMP_SCRIPTS/tools/install.sh
-RUN bash $TMP_SCRIPTS/tools/install-smb.sh
-RUN bash $TMP_SCRIPTS/tools/install-terraform.sh
 
 # Install Discord
 RUN bash $TMP_SCRIPTS/discord/install.sh
@@ -39,22 +34,6 @@ RUN bash $TMP_SCRIPTS/vs_code/install.sh
 # Cleanup installation files
 RUN rm -rf $TMP_SCRIPTS
 ######### End Installation ###########
-
-######### Begin Configuration ###########
-
-### Copy configuration files
-COPY ./configure $TMP_SCRIPTS/
-
-### Set wallpaper
-RUN bash $TMP_SCRIPTS/wallpaper/configure.sh
-
-### Download chezmoi and set up dotfiles
-RUN bash $TMP_SCRIPTS/home/configure.sh -g
-
-# Cleanup configuration files
-RUN rm -rf $TMP_SCRIPTS
-
-######### End Configuration ###########
 
 RUN chown 1000:0 $HOME
 RUN $STARTUPDIR/set_user_permission.sh $HOME

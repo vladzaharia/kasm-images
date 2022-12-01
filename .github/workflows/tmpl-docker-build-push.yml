@@ -12,6 +12,12 @@ on:
       image:
         required: true
         type: string
+      dockerfile:
+        required: true
+        type: string
+      waitFor:
+        required: false
+        type: string
     secrets:
       password:
         required: true
@@ -20,6 +26,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Wait for ${{ inputs.waitFor }}
+        uses: lewagon/wait-on-check-action@v1.2.0
+        if: ${{ inputs.waitFor }} != ""
+        with:
+          ref: ${{ github.ref }}
+          check-name: ${{ inputs.waitFor }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -55,7 +70,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: Dockerfile.desktop
+          file: ${{ inputs.dockerfile }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

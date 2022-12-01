@@ -1,4 +1,4 @@
-name: Build desktop image
+name: Build base image
 
 on:
   schedule:
@@ -10,14 +10,13 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-desktop:
-    name: Build desktop image
+  build-base:
+    name: Build base image
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     with:
       registry: docker.zhr.one
       username: github
-      image: kasm/desktop
-      dockerfile: Dockerfile.desktop
-      waitFor: Build base image
+      image: kasm/base
+      dockerfile: Dockerfile.base
     secrets:
       password: ${{ secrets.ARTIFACT_PW }}

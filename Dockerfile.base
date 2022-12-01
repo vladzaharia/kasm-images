@@ -1,0 +1,37 @@
+FROM kasmweb/core-ubuntu-jammy:1.12.0
+USER root
+
+ENV HOME /home/kasm-default-profile
+ENV STARTUPDIR /dockerstartup
+ENV TMP_SCRIPTS $STARTUPDIR/tmp
+WORKDIR $HOME
+
+######### Begin Installation ###########
+# Copy installation files
+COPY ./install $TMP_SCRIPTS/
+
+# Install tools
+RUN bash $TMP_SCRIPTS/tools/install.sh
+RUN bash $TMP_SCRIPTS/tools/install-smb.sh
+RUN bash $TMP_SCRIPTS/tools/install-terraform.sh
+RUN bash $TMP_SCRIPTS/tools/upgrade.sh
+
+# Cleanup installation files
+RUN rm -rf $TMP_SCRIPTS
+######### End Installation ###########
+
+######### Begin Configuration ###########
+
+### Copy configuration files
+COPY ./configure $TMP_SCRIPTS/
+
+### Set wallpaper
+RUN bash $TMP_SCRIPTS/wallpaper/configure.sh
+
+### Download chezmoi and set up dotfiles
+RUN bash $TMP_SCRIPTS/home/configure.sh -g
+
+# Cleanup configuration files
+RUN rm -rf $TMP_SCRIPTS
+
+######### End Configuration ###########
