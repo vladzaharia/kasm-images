@@ -36,5 +36,7 @@ RUN rm -rf $TMP_SCRIPTS
 
 # Copy SSH Keys
 COPY ./private/* $HOME/.ssh/
+RUN chmod 644 $HOME/.ssh/id_rsa.pub
+RUN chmod 600 $HOME/.ssh/id_rsa
 
 ######### End Configuration ###########
