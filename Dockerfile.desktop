@@ -48,6 +48,9 @@ COPY ./configure $TMP_SCRIPTS/
 ### Set wallpaper
 RUN bash $TMP_SCRIPTS/wallpaper/configure.sh
 
+### Download chezmoi and set up dotfiles
+RUN bash $TMP_SCRIPTS/home/configure.sh -g
+
 # Cleanup configuration files
 RUN rm -rf $TMP_SCRIPTS
 

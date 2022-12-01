@@ -8,11 +8,11 @@ Images are based on the [core images](https://github.com/kasmtech/workspaces-cor
 
 The following images are available:
 
-| Image name | Dockerfile |
-| ---------- | ---------- |
-| `personal-desktop` | `Dockerfile.desktop` |
-| `vscode` | `Dockerfile.vscode` |
-| `terminal` | `Dockerfile.terminal` |
+| Image name | Dockerfile | Makefile targets |
+| ---------- | ---------- | ---------------- |
+| `personal-desktop` | `Dockerfile.desktop` | `desktop` |
+| `vscode` | `Dockerfile.vscode` | `vscode` |
+| `terminal` | `Dockerfile.terminal` | `terminal` |
 
 ## Tags
 
@@ -24,18 +24,21 @@ The above images are published with the following tags:
 | `testing` | Locally-created tags used for testing images. |
 | `pr-*` | Automatically created for PR builds, not pushed to artifact repository. |
 
-## Building an image
+## Building an image locally
 
 You can build an image using Docker with [Buildx](https://github.com/docker/buildx).
 
 ```shell
-docker buildx build \
-    --platform linux/arm64,linux/amd64 \
-    -t <TAG>:testing \
-    -f <DOCKERFILE> .
+make <TARGET>
 ```
 
-## Pushing to Private Registry
+You can also build only the arm64 image for a faster build time on M1 Macs using:
+
+```shell
+make <TARGET>-arm64
+```
+
+## Building and pushing to registry
 
 Authenticate to the private registry using:
 
@@ -46,11 +49,7 @@ docker login docker.zhr.one
 You can build and push using:
 
 ```shell
-docker buildx build \
-    --platform linux/arm64,linux/amd64 \
-    -t docker.zhr.one/<TAG>:testing \
-    --push \
-    -f <DOCKERFILE> .
+make <TARGET>-push
 ```
 
 Or push a previously built tag using:
