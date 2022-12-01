@@ -30,3 +30,13 @@ jobs:
       dockerfile: Dockerfile.desktop
     secrets:
       password: ${{ secrets.ARTIFACT_PW }}
+      
+  build-vscode:
+    name: Build vscode image
+    uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
+    needs: build-base
+    with:
+      image: kasm/vscode
+      dockerfile: Dockerfile.vscode
+    secrets:
+      password: ${{ secrets.ARTIFACT_PW }}
