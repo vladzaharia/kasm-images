@@ -14,6 +14,16 @@ The following images are available:
 | `vscode` | `Dockerfile.vscode` |
 | `terminal` | `Dockerfile.terminal` |
 
+## Tags
+
+The above images are published with the following tags:
+
+| Tag | Description |
+| --- | ----------- |
+| `main` | Automatically updated every Sunday at 1AM with the latest updates. |
+| `testing` | Locally-created tags used for testing images. |
+| `pr-*` | Automatically created for PR builds, not pushed to artifact repository. |
+
 ## Building an image
 
 You can build an image using Docker with [Buildx](https://github.com/docker/buildx).
@@ -30,7 +40,7 @@ docker buildx build \
 Authenticate to the private registry using:
 
 ```shell
-docker login docker.zhr.one:443
+docker login docker.zhr.one
 ```
 
 You can build and push using:
@@ -38,7 +48,7 @@ You can build and push using:
 ```shell
 docker buildx build \
     --platform linux/arm64,linux/amd64 \
-    -t <TAG>:testing \
+    -t docker.zhr.one/<TAG>:testing \
     --push \
     -f <DOCKERFILE> .
 ```
@@ -46,8 +56,8 @@ docker buildx build \
 Or push a previously built tag using:
 
 ```shell
-docker tag <TAG>:testing docker.zhr.one:443/<TAG>:testing
-docker push docker.zhr.one:443/<TAG>:testing
+docker tag <TAG>:testing docker.zhr.one/<TAG>:testing
+docker push docker.zhr.one/<TAG>:testing
 ```
 
 > **NOTE**: Use the `testing` label for any unofficial builds.

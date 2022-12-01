@@ -24,9 +24,6 @@ RUN bash $TMP_SCRIPTS/firefox/install.sh
 # Install Microsoft Edge
 RUN bash $TMP_SCRIPTS/edge/install.sh
 
-# Install NextCloud
-RUN bash $TMP_SCRIPTS/nextcloud/install.sh
-
 # Install Only Office
 RUN bash $TMP_SCRIPTS/only_office/install.sh
 
