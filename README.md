@@ -1,6 +1,6 @@
 # KASM Custom Images
 
-Custom images for KASM which are personalized for zhr.one use. 
+Custom images for KASM which are personalized for zhr.one use.
 
 Images are based on the [core images](https://github.com/kasmtech/workspaces-core-images) and Dockerfile setups on the [images](https://github.com/kasmtech/workspaces-images).
 
