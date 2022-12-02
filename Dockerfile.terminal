@@ -1,0 +1,24 @@
+FROM docker.zhr.one/kasm/base-app:latest
+
+######### Begin Installation ###########
+# Copy installation files
+COPY ./install $TMP_SCRIPTS/
+
+# Install VS Code
+RUN bash $TMP_SCRIPTS/terminal/install.sh
+COPY ./install/terminal/startup.sh $STARTUPDIR/custom_startup.sh
+RUN chmod 755 $STARTUPDIR/custom_startup.sh
+
+# Cleanup installation files
+RUN rm -rf $TMP_SCRIPTS
+######### End Installation ###########
+
+RUN chown 1000:0 $HOME
+RUN $STARTUPDIR/set_user_permission.sh $HOME
+RUN bash $STARTUPDIR/fix-ssh-perms.sh
+
+ENV HOME /home/kasm-user
+WORKDIR $HOME
+RUN mkdir -p $HOME && chown -R 1000:0 $HOME
+
+USER 1000
