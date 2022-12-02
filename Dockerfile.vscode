@@ -15,10 +15,10 @@ RUN rm -rf $TMP_SCRIPTS
 
 RUN chown 1000:0 $HOME
 RUN $STARTUPDIR/set_user_permission.sh $HOME
+RUN bash $STARTUPDIR/fix-ssh-perms.sh
 
 ENV HOME /home/kasm-user
 WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
-RUN bash $STARTUPDIR/fix-ssh-perms.sh
 
 USER 1000
