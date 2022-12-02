@@ -36,6 +36,7 @@ RUN rm -rf $TMP_SCRIPTS
 
 # Copy SSH Keys
 COPY ./private/* $HOME/.ssh/
+COPY ./configure/home/fix-ssh-perms.sh $HOME/
 COPY ./configure/home/fix-ssh-perms.sh $STARTUPDIR/
 
 ######### End Configuration ###########
