@@ -3,14 +3,6 @@ name: Docker Build and Push
 on:
   workflow_call:
     inputs:
-      registry:
-        description: Registry to use for authentication and pushing
-        required: true
-        type: string
-      username:
-        description: Username of user for registry authentication
-        required: true
-        type: string
       image:
         description: Name of image to build and push
         required: true
@@ -25,6 +17,12 @@ on:
         default: linux/arm64,linux/amd64
         type: string
     secrets:
+      registry:
+        description: Registry to use for authentication and pushing
+        required: true
+      username:
+        description: Username of user for registry authentication
+        required: true
       password:
         description: Password of user for registry authentication
         required: true
