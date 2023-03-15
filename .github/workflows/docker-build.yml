@@ -14,7 +14,7 @@ jobs:
     name: base image
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     with:
-      image: kasm/base
+      image: base
       dockerfile: Dockerfile.base
     secrets:
       registry: ${{ secrets.ACR_ENDPOINT }}
@@ -28,7 +28,7 @@ jobs:
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     needs: build-base
     with:
-      image: kasm/base-app
+      image: base-app
       dockerfile: Dockerfile.base-app
     secrets:
       registry: ${{ secrets.ACR_ENDPOINT }}
@@ -40,7 +40,7 @@ jobs:
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     needs: build-base
     with:
-      image: kasm/desktop
+      image: desktop
       dockerfile: Dockerfile.desktop
     secrets:
       registry: ${{ secrets.ACR_ENDPOINT }}
@@ -52,7 +52,7 @@ jobs:
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     needs: build-base-app
     with:
-      image: kasm/terminal
+      image: apps/terminal
       dockerfile: Dockerfile.terminal
     secrets:
       registry: ${{ secrets.ACR_ENDPOINT }}
@@ -64,7 +64,7 @@ jobs:
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     needs: build-base-app
     with:
-      image: kasm/vscode
+      image: apps/vscode
       dockerfile: Dockerfile.vscode
     secrets:
       registry: ${{ secrets.ACR_ENDPOINT }}

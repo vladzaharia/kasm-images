@@ -3,14 +3,14 @@ all: base base-app desktop vscode
 base: Dockerfile.base
 	docker buildx build --platform linux/arm64,linux/amd64 -t kasm/base:testing -f Dockerfile.base .
 base-push: Dockerfile.base
-	docker buildx build --platform linux/arm64,linux/amd64 -t zhrkasm.azurecr.io/kasm/base:testing --push -f Dockerfile.base .
+	docker buildx build --platform linux/arm64,linux/amd64 -t zhrkasm.azurecr.io/base:testing --push -f Dockerfile.base .
 base-arm64: Dockerfile.base
 	docker buildx build --platform linux/arm64 -t kasm/base:testing -f Dockerfile.base .
 
 base-app: Dockerfile.base-app
 	docker buildx build --platform linux/arm64,linux/amd64 -t kasm/base-app:testing -f Dockerfile.base-app .
 base-app-push: Dockerfile.base-app
-	docker buildx build --platform linux/arm64,linux/amd64 -t zhrkasm.azurecr.io/kasm/base-app:testing --push -f Dockerfile.base-app .
+	docker buildx build --platform linux/arm64,linux/amd64 -t zhrkasm.azurecr.io/base-app:testing --push -f Dockerfile.base-app .
 base-app-arm64: Dockerfile.base-app
 	docker buildx build --platform linux/arm64 -t kasm/base-app:testing -f Dockerfile.base-app .
 

@@ -1,4 +1,4 @@
-FROM zhrkasm.azurecr.io/kasm/base:latest
+FROM zhrkasm.azurecr.io/base:latest
 
 ######### Begin Installation ###########
 # Copy installation files
