@@ -1,4 +1,4 @@
-FROM docker.zhr.one/kasm/base-app:latest
+FROM zhrkasm.azurecr.io/kasm/base-app:latest
 
 ######### Begin Installation ###########
 # Copy installation files

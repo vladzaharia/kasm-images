@@ -43,7 +43,7 @@ make <TARGET>-arm64
 Authenticate to the private registry using:
 
 ```shell
-docker login docker.zhr.one
+docker login zhrkasm.azurecr.io
 ```
 
 You can build and push using:
@@ -55,8 +55,8 @@ make <TARGET>-push
 Or push a previously built tag using:
 
 ```shell
-docker tag <TAG>:testing docker.zhr.one/<TAG>:testing
-docker push docker.zhr.one/<TAG>:testing
+docker tag <TAG>:testing zhrkasm.azurecr.io/<TAG>:testing
+docker push zhrkasm.azurecr.io/<TAG>:testing
 ```
 
 > **NOTE**: Use the `testing` label for any unofficial builds.
