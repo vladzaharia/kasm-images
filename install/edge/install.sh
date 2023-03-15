@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -ex
-
 ARCH=$(arch | sed 's/aarch64/arm64/g' | sed 's/x86_64/amd64/g')
 if [ "${ARCH}" == "arm64" ] ; then
   echo "Edge not supported on arm64, skipping installation"
@@ -46,7 +45,7 @@ cat >>/etc/opt/edge/policies/managed/default_managed_policy.json <<EOL
 {"CommandLineFlagSecurityWarningsEnabled": false, "DefaultBrowserSettingEnabled": false}
 EOL
 
-# Vanilla Edge looks for policies in /etc/opt/edge/policies/managed which is used by web filtering.
+# Vanilla Chrome looks for policies in /etc/opt/chrome/policies/managed which is used by web filtering.
 #   Create a symlink here so filter is applied to edge as well.
-mkdir -p /etc/opt/edge/policies/
-ln -s /etc/opt/edge/policies/managed  /etc/opt/edge/policies/
+mkdir -p /etc/opt/chrome/policies/
+ln -s /etc/opt/edge/policies/managed  /etc/opt/chrome/policies/
