@@ -9,8 +9,6 @@ RUN bash $TMP_SCRIPTS/vs_code/install.sh
 COPY ./install/vs_code/startup.sh $STARTUPDIR/custom_startup.sh
 RUN chmod 755 $STARTUPDIR/custom_startup.sh
 
-# Cleanup installation files
-RUN rm -rf $TMP_SCRIPTS
 ######### End Installation ###########
 
 RUN chown 1000:0 $HOME
@@ -21,5 +19,12 @@ ENV HOME /home/kasm-user
 WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
 
+# Configure VS Code install
 USER 1000
 RUN bash $TMP_SCRIPTS/vs_code/configure.sh
+
+# Cleanup installation files
+USER root
+RUN rm -rf $TMP_SCRIPTS
+
+USER 1000
