@@ -4,7 +4,7 @@ FROM zhrkasm.azurecr.io/base-app:latest
 # Copy installation files
 COPY ./install $TMP_SCRIPTS/
 
-# Install VS Code
+# Install Terminal
 RUN bash $TMP_SCRIPTS/terminal/install.sh
 COPY ./install/terminal/startup.sh $STARTUPDIR/custom_startup.sh
 RUN chmod 755 $STARTUPDIR/custom_startup.sh

@@ -5,3 +5,9 @@ RUN cp $HOME/.config/xfce4/xfconf/single-application-xfce-perchannel-xml/* $HOME
 RUN cp /usr/share/extra/backgrounds/bg_kasm.png /usr/share/extra/backgrounds/bg_default.png
 RUN apt-get remove -y xfce4-panel
 
+# Copy installation files
+COPY ./install $TMP_SCRIPTS/
+
+# Install Microsoft Edge
+RUN bash $TMP_SCRIPTS/edge/install.sh
+
