@@ -28,6 +28,9 @@ RUN bash $TMP_SCRIPTS/terminal/install.sh
 # Install VS Code
 RUN bash $TMP_SCRIPTS/vs_code/install.sh
 
+# Install Zoom
+RUN bash $TMP_SCRIPTS/zoom/install.sh
+
 # Cleanup installation files
 RUN rm -rf $TMP_SCRIPTS
 ######### End Installation ###########

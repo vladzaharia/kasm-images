@@ -27,7 +27,7 @@ sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/microsoft-edg
 sed -i 's/"exit_type":"Crashed"/"exit_type":"None"/' ~/.config/microsoft-edge-dev/Default/Preferences
 if [ -f /opt/VirtualGL/bin/vglrun ] && [ ! -z "\${KASM_EGL_CARD}" ] && [ ! -z "\${KASM_RENDERD}" ] && [ -O "\${KASM_RENDERD}" ] && [ -O "\${KASM_EGL_CARD}" ] ; then
     echo "Starting Edge with GPU Acceleration on EGL device \${KASM_EGL_CARD}"
-    vglrun -d "\${KASM_EGL_CARD}" /opt/microsoft/msedge-dev/microsoft-edge ${EDGE_ARGS} "\$@" 
+    vglrun -d "\${KASM_EGL_CARD}" /opt/microsoft/msedge-dev/microsoft-edge ${CHROME_ARGS} "\$@" 
 else
     echo "Starting Edge"
     /opt/microsoft/msedge-dev/microsoft-edge ${EDGE_ARGS} "\$@"
@@ -46,8 +46,7 @@ cat >>/etc/opt/edge/policies/managed/default_managed_policy.json <<EOL
 {"CommandLineFlagSecurityWarningsEnabled": false, "DefaultBrowserSettingEnabled": false}
 EOL
 
-# Vanilla EDGE looks for policies in /etc/opt/EDGE/policies/managed which is used by web filtering.
+# Vanilla Edge looks for policies in /etc/opt/edge/policies/managed which is used by web filtering.
 #   Create a symlink here so filter is applied to edge as well.
-mkdir -p /etc/opt/EDGE/policies/
-ln -s /etc/opt/edge/policies/managed  /etc/opt/EDGE/policies/
-
+mkdir -p /etc/opt/edge/policies/
+ln -s /etc/opt/edge/policies/managed  /etc/opt/edge/policies/
