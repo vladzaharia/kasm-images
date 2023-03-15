@@ -17,7 +17,9 @@ jobs:
       image: kasm/base
       dockerfile: Dockerfile.base
     secrets:
-      password: ${{ secrets.ARTIFACT_PW }}
+      registry: ${{ secrets.ACR_ENDPOINT }}
+      username: ${{ secrets.ACR_USERNAME }}
+      password: ${{ secrets.ACR_PASSWORD }}
       sshPriv: ${{ secrets.SSH_PRIV_KEY }} 
       sshPub: ${{ secrets.SSH_PUB_KEY }}
 
@@ -29,7 +31,9 @@ jobs:
       image: kasm/base-app
       dockerfile: Dockerfile.base-app
     secrets:
-      password: ${{ secrets.ARTIFACT_PW }}
+      registry: ${{ secrets.ACR_ENDPOINT }}
+      username: ${{ secrets.ACR_USERNAME }}
+      password: ${{ secrets.ACR_PASSWORD }}
 
   build-desktop:
     name: desktop image
@@ -39,8 +43,10 @@ jobs:
       image: kasm/desktop
       dockerfile: Dockerfile.desktop
     secrets:
-      password: ${{ secrets.ARTIFACT_PW }}
-      
+      registry: ${{ secrets.ACR_ENDPOINT }}
+      username: ${{ secrets.ACR_USERNAME }}
+      password: ${{ secrets.ACR_PASSWORD }}
+
   build-terminal:
     name: terminal image
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
@@ -49,7 +55,9 @@ jobs:
       image: kasm/terminal
       dockerfile: Dockerfile.terminal
     secrets:
-      password: ${{ secrets.ARTIFACT_PW }}
+      registry: ${{ secrets.ACR_ENDPOINT }}
+      username: ${{ secrets.ACR_USERNAME }}
+      password: ${{ secrets.ACR_PASSWORD }}
 
   build-vscode:
     name: vscode image
@@ -59,4 +67,6 @@ jobs:
       image: kasm/vscode
       dockerfile: Dockerfile.vscode
     secrets:
-      password: ${{ secrets.ARTIFACT_PW }}
+      registry: ${{ secrets.ACR_ENDPOINT }}
+      username: ${{ secrets.ACR_USERNAME }}
+      password: ${{ secrets.ACR_PASSWORD }}
