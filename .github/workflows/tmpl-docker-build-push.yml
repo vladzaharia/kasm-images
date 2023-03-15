@@ -14,7 +14,7 @@ on:
       platforms:
         description: Platforms to build images for
         required: false
-        default: linux/arm64,linux/amd64
+        default: linux/amd64 #,linux/arm64
         type: string
     secrets:
       registry:
