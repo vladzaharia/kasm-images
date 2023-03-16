@@ -26,7 +26,7 @@ RUN bash $TMP_SCRIPTS/slack/install.sh
 RUN bash $TMP_SCRIPTS/terminal/install.sh
 
 # Install VS Code
-RUN bash $TMP_SCRIPTS/vs_code/install.sh
+RUN bash $TMP_SCRIPTS/vscode/install.sh
 
 # Install Zoom
 RUN bash $TMP_SCRIPTS/zoom/install.sh
@@ -42,5 +42,17 @@ RUN bash $STARTUPDIR/fix-ssh-perms.sh
 ENV HOME /home/kasm-user
 WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
+
+######### Begin Configuration ###########
+# Copy configuration files
+COPY ./configure $TMP_SCRIPTS/
+
+USER 1000
+RUN bash $TMP_SCRIPTS/vscode/configure.sh
+
+# Cleanup configuration files
+USER root
+RUN rm -rf $TMP_SCRIPTS
+######### End Configuration ###########
 
 USER 1000
