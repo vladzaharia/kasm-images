@@ -12,7 +12,7 @@ declare -A extensions=(
     "esbenp.prettier-vscode"
     "eamodio.gitlens"
     "editorconfig.editorconfig"
-    "ms-azuretools.vscode-docker
+    "ms-azuretools.vscode-docker"
     "spmeesseman.vscode-taskexplorer"
     "github.vscode-pull-request-github"
     "gitlab.gitlab-workflow"
