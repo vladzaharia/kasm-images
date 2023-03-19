@@ -21,7 +21,6 @@ RUN rm -rf $TMP_SCRIPTS
 ######### End Installation ###########
 
 ######### Begin Configuration ###########
-
 ### Copy configuration files
 COPY ./configure $TMP_SCRIPTS/
 
@@ -38,5 +37,4 @@ RUN rm -rf $TMP_SCRIPTS
 COPY ./private/* $HOME/.ssh/
 COPY ./configure/home/fix-ssh-perms.sh $HOME/
 COPY ./configure/home/fix-ssh-perms.sh $STARTUPDIR/
-
 ######### End Configuration ###########
