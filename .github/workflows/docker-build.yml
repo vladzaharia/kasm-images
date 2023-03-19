@@ -23,6 +23,7 @@ jobs:
         with:
           url: https://vault.zhr.one
           role: kasm-images
+          path: github
           method: jwt
           jwtGithubAudience: sigstore
           secrets: |
