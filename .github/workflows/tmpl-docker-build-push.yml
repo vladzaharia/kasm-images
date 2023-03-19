@@ -36,7 +36,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
+      - name: Pull secrets from Vault
+        id: pull-secrets
+        uses: hashicorp/vault-action@v2
+        with:
+          url: https://vault.zhr.one
+          role: kasm-images
+          path: github
+          method: jwt
+          jwtGithubAudience: sigstore
+          secrets: |
+            /ci-cd/kasm-images/acr ACR_ENDPOINT ;
+            /ci-cd/kasm-images/acr ACR_PASSWORD ;
+            /ci-cd/kasm-images/acr ACR_USERNAME ;
+            /ci-cd/kasm-images/ssh SSH_PRIV_KEY ;
+            /ci-cd/kasm-images/ssh SSH_PUB_KEY
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -44,8 +63,8 @@ jobs:
         run: 'mkdir private && echo "$SSH_PRIV_KEY" > private/id_rsa && echo "$SSH_PUB_KEY" > private/id_rsa.pub'
         shell: bash
         env:
-          SSH_PRIV_KEY: ${{ secrets.sshPriv }}
-          SSH_PUB_KEY: ${{ secrets.sshPub }}
+          SSH_PRIV_KEY: ${{ steps.pull-secrets.outputs.SSH_PRIV_KEY }}
+          SSH_PUB_KEY: ${{ steps.pull-secrets.outputs.SSH_PUB_KEY }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -53,19 +72,19 @@ jobs:
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Log into registry ${{ secrets.registry }}
+      - name: Log into registry ${{ steps.pull-secrets.outputs.ACR_ENDPOINT }}
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v2
         with:
-          registry: ${{ secrets.registry }}
-          username: ${{ secrets.username }}
-          password: ${{ secrets.password }}
+          registry: ${{ steps.pull-secrets.outputs.ACR_ENDPOINT }}
+          username: ${{ steps.pull-secrets.outputs.ACR_USERNAME }}
+          password: ${{ steps.pull-secrets.outputs.ACR_PASSWORD }}
 
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ secrets.registry }}/${{ inputs.image }}
+          images: ${{ steps.pull-secrets.outputs.ACR_ENDPOINT }}/${{ inputs.image }}
           tags: |
             type=schedule,pattern=weekly
             type=ref,event=branch
