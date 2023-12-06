@@ -3,6 +3,7 @@ name: Build KASM images
 on:
   schedule:
     - cron: '0 1 * * 0'
+  workflow_dispatch:
   push:
     branches: [ "main" ]
     tags: [ 'v*.*.*' ]
