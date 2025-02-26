@@ -56,7 +56,7 @@ jobs:
           role: kasm-images
           path: github
           method: jwt
-          jwtGithubAudience: sigstore
+          # jwtGithubAudience: sigstore
           secrets: |
             /ci-cd/kasm-images/ssh SSH_PRIV_KEY ;
             /ci-cd/kasm-images/ssh SSH_PUB_KEY
