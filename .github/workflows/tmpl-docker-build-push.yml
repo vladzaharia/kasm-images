@@ -72,7 +72,7 @@ jobs:
           role: kasm-images
           path: github
           method: jwt
-          jwtGithubAudience: sigstore
+          # jwtGithubAudience: sigstore
           secrets: |
             /ci-cd/kasm-images/acr ACR_ENDPOINT ;
             /ci-cd/kasm-images/acr ACR_USERNAME ;
