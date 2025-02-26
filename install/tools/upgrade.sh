@@ -2,4 +2,4 @@
 set -ex
 # Upgrade all packages
 apt-get update
-apt-get upgrade -y
+DEBIAN_FRONTEND=noninteractive apt-get upgrade -y --force-confnew -o Dpkg::Options::="--force-confnew"
