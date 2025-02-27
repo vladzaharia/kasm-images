@@ -18,9 +18,9 @@ jobs:
       image: base
       dockerfile: Dockerfile.base
     secrets:
-      registry: ${{ secrets.ACR_ENDPOINT }}
-      username: ${{ secrets.ACR_USERNAME }}
-      password: ${{ secrets.ACR_PASSWORD }}
+      registry: ${{ secrets.DOCKER_ENDPOINT }}
+      username: ${{ secrets.DOCKER_USERNAME }}
+      password: ${{ secrets.DOCKER_PASSWORD }}
       sshPriv: ${{ secrets.SSH_PRIV_KEY }} 
       sshPub: ${{ secrets.SSH_PUB_KEY }}
 
@@ -32,9 +32,9 @@ jobs:
       image: base-app
       dockerfile: Dockerfile.base-app
     secrets:
-      registry: ${{ secrets.ACR_ENDPOINT }}
-      username: ${{ secrets.ACR_USERNAME }}
-      password: ${{ secrets.ACR_PASSWORD }}
+      registry: ${{ secrets.DOCKER_ENDPOINT }}
+      username: ${{ secrets.DOCKER_USERNAME }}
+      password: ${{ secrets.DOCKER_PASSWORD }}
 
   build-desktop:
     name: desktop image
@@ -44,9 +44,9 @@ jobs:
       image: desktop
       dockerfile: Dockerfile.desktop
     secrets:
-      registry: ${{ secrets.ACR_ENDPOINT }}
-      username: ${{ secrets.ACR_USERNAME }}
-      password: ${{ secrets.ACR_PASSWORD }}
+      registry: ${{ secrets.DOCKER_ENDPOINT }}
+      username: ${{ secrets.DOCKER_USERNAME }}
+      password: ${{ secrets.DOCKER_PASSWORD }}
 
   build-terminal:
     name: terminal image
@@ -56,9 +56,9 @@ jobs:
       image: apps/terminal
       dockerfile: Dockerfile.terminal
     secrets:
-      registry: ${{ secrets.ACR_ENDPOINT }}
-      username: ${{ secrets.ACR_USERNAME }}
-      password: ${{ secrets.ACR_PASSWORD }}
+      registry: ${{ secrets.DOCKER_ENDPOINT }}
+      username: ${{ secrets.DOCKER_USERNAME }}
+      password: ${{ secrets.DOCKER_PASSWORD }}
 
   build-vscode:
     name: vscode image
@@ -68,6 +68,6 @@ jobs:
       image: apps/vscode
       dockerfile: Dockerfile.vscode
     secrets:
-      registry: ${{ secrets.ACR_ENDPOINT }}
-      username: ${{ secrets.ACR_USERNAME }}
-      password: ${{ secrets.ACR_PASSWORD }}
+      registry: ${{ secrets.DOCKER_ENDPOINT }}
+      username: ${{ secrets.DOCKER_USERNAME }}
+      password: ${{ secrets.DOCKER_PASSWORD }}
