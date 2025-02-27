@@ -1,4 +1,4 @@
-FROM zhrkasm.azurecr.io/kasm/core-ubuntu:1.13.0
+FROM zhrkasm.azurecr.io/kasm/core-ubuntu:1.16.1
 USER root
 
 ENV HOME /home/kasm-default-profile
