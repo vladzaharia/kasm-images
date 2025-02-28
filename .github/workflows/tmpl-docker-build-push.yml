@@ -105,13 +105,13 @@ jobs:
         with:
           images: ${{ env.DOCKER_ENDPOINT }}/${{ inputs.image }}
           tags: |
-            type=schedule,pattern=weekly,enable={{ inputs.only_push_base_tag != true }}
-            type=ref,event=branch,enable={{ inputs.only_push_base_tag != true }}
-            type=ref,event=tag,enable={{ inputs.only_push_base_tag != true }}
-            type=ref,event=pr,enable={{ inputs.only_push_base_tag != true }}
-            type=raw,value=latest,enable={{ is_default_branch && inputs.only_push_base_tag != true }}
+            type=schedule,pattern=weekly,enable={{ inputs.only_push_base_tag != 'true' }}
+            type=ref,event=branch,enable={{ inputs.only_push_base_tag != 'true' }}
+            type=ref,event=tag,enable={{ inputs.only_push_base_tag != 'true' }}
+            type=ref,event=pr,enable={{ inputs.only_push_base_tag != 'true' }}
+            type=raw,value=latest,enable={{ is_default_branch && inputs.only_push_base_tag != 'true' }}
             type=raw,value=${{ inputs.base_tag }}
-            type=raw,value=testing,enable=${{ github.event_name == 'pull_request' && inputs.only_push_base_tag != true }}
+            type=raw,value=testing,enable=${{ github.event_name == 'pull_request' && inputs.only_push_base_tag != 'true' }}
 
       - name: Build ${{ inputs.image }} image
         id: build-and-push
