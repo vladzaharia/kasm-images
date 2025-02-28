@@ -17,7 +17,7 @@ jobs:
     with:
       base_image: core-ubuntu-noble
       base_tag: 1.16.1
-      image: base
+      image: base-ubuntu
       dockerfile: Dockerfile.base
     secrets:
       registry: ${{ secrets.DOCKER_ENDPOINT }}
@@ -47,7 +47,7 @@ jobs:
     with:
       base_image: base-ubuntu
       base_tag: 1.16.1
-      image: desktop
+      image: desktop-ubuntu
       dockerfile: Dockerfile.desktop
     secrets:
       registry: ${{ secrets.DOCKER_ENDPOINT }}
