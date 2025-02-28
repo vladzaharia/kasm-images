@@ -10,16 +10,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  KASM_VERSION: 1.16.1
-
 jobs:
   build-base:
     name: base image
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     with:
       base_image: core-ubuntu-noble
-      base_tag: ${{ env.KASM_VERSION }}
+      base_tag: 1.16.1
       image: base
       dockerfile: Dockerfile.base
     secrets:
@@ -35,7 +32,7 @@ jobs:
     needs: build-base
     with:
       base_image: base-ubuntu
-      base_tag: ${{ env.KASM_VERSION }}
+      base_tag: 1.16.1
       image: base-apps
       dockerfile: Dockerfile.base-apps
     secrets:
@@ -49,7 +46,7 @@ jobs:
     needs: build-base
     with:
       base_image: base-ubuntu
-      base_tag: ${{ env.KASM_VERSION }}
+      base_tag: 1.16.1
       image: desktop
       dockerfile: Dockerfile.desktop
     secrets:
@@ -63,7 +60,7 @@ jobs:
     needs: build-base-apps
     with:
       base_image: base-apps
-      base_tag: ${{ env.KASM_VERSION }}
+      base_tag: 1.16.1
       image: apps/terminal
       dockerfile: Dockerfile.terminal
     secrets:
@@ -77,7 +74,7 @@ jobs:
     needs: build-base-apps
     with:
       base_image: base-apps
-      base_tag: ${{ env.KASM_VERSION }}
+      base_tag: 1.16.1
       image: apps/vscode
       dockerfile: Dockerfile.vscode
     secrets:
