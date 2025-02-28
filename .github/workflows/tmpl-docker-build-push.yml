@@ -7,6 +7,10 @@ on:
         description: Name of image to use as the base for this build
         required: true
         type: string
+      base_tag:
+        description: Tag of image to use as the base for this build
+        required: true
+        type: string
       image:
         description: Name of image to build and push
         required: true
