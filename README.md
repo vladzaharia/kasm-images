@@ -10,7 +10,7 @@ The following images are available:
 
 | Image name | Dockerfile | Makefile targets |
 | ---------- | ---------- | ---------------- |
-| `personal-desktop` | `Dockerfile.desktop` | `desktop` |
+| `desktop-ubuntu` | `Dockerfile.desktop` | `desktop` |
 | `vscode` | `Dockerfile.vscode` | `vscode` |
 | `terminal` | `Dockerfile.terminal` | `terminal` |
 
@@ -43,7 +43,7 @@ make <TARGET>-arm64
 Authenticate to the private registry using:
 
 ```shell
-docker login zhrkasm.azurecr.io
+docker login images.kasm.polaris.gdn
 ```
 
 You can build and push using:
@@ -55,8 +55,8 @@ make <TARGET>-push
 Or push a previously built tag using:
 
 ```shell
-docker tag <TAG>:testing zhrkasm.azurecr.io/<TAG>:testing
-docker push zhrkasm.azurecr.io/<TAG>:testing
+docker tag <TAG>:testing images.kasm.polaris.gdn/<TAG>:testing
+docker push images.kasm.polaris.gdn/<TAG>:testing
 ```
 
 > **NOTE**: Use the `testing` label for any unofficial builds.

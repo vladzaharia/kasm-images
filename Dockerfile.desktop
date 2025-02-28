@@ -1,4 +1,7 @@
-FROM zhrkasm.azurecr.io/base:latest
+ARG BASE_IMAGE="base-ubuntu"
+ARG BASE_TAG="1.16.1"
+
+FROM images.kasm.polaris.gdn/$BASE_IMAGE:$BASE_TAG
 
 ######### Begin Installation ###########
 # Copy installation files
@@ -28,6 +31,9 @@ RUN bash $TMP_SCRIPTS/terminal/install.sh
 # Install VS Code
 RUN bash $TMP_SCRIPTS/vscode/install.sh
 
+# Install VPN
+RUN bash $TMP_SCRIPTS/vpn/install.sh
+
 # Install Zoom
 RUN bash $TMP_SCRIPTS/zoom/install.sh
 
@@ -56,3 +62,5 @@ RUN rm -rf $TMP_SCRIPTS
 ######### End Configuration ###########
 
 USER 1000
+
+CMD ["--tail-log"]

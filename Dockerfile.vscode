@@ -1,4 +1,7 @@
-FROM zhrkasm.azurecr.io/base-app:latest
+ARG BASE_IMAGE="base-apps"
+ARG BASE_TAG="1.16.1"
+
+FROM images.kasm.polaris.gdn/$BASE_IMAGE:$BASE_TAG
 
 ######### Begin Installation ###########
 # Copy installation files

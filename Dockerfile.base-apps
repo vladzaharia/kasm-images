@@ -1,4 +1,7 @@
-FROM zhrkasm.azurecr.io/base:latest
+ARG BASE_IMAGE="base-ubuntu"
+ARG BASE_TAG="1.16.1"
+
+FROM images.kasm.polaris.gdn/$BASE_IMAGE:$BASE_TAG
 
 # Update the desktop environment to be optimized for a single application
 RUN cp $HOME/.config/xfce4/xfconf/single-application-xfce-perchannel-xml/* $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/
