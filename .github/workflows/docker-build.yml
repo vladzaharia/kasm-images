@@ -17,7 +17,7 @@ jobs:
     with:
       base_image: core-ubuntu-noble
       base_tag: 1.16.1
-      image: base-ubuntu
+      image: base/ubuntu
       dockerfile: Dockerfile.base
     secrets:
       registry: ${{ secrets.DOCKER_ENDPOINT }}
@@ -31,9 +31,9 @@ jobs:
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     needs: build-base
     with:
-      base_image: base-ubuntu
+      base_image: base/ubuntu
       base_tag: 1.16.1
-      image: base-apps
+      image: base/apps
       dockerfile: Dockerfile.base-apps
     secrets:
       registry: ${{ secrets.DOCKER_ENDPOINT }}
@@ -45,7 +45,7 @@ jobs:
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     needs: build-base
     with:
-      base_image: base-ubuntu
+      base_image: base/ubuntu
       base_tag: 1.16.1
       image: desktop-ubuntu
       dockerfile: Dockerfile.desktop
@@ -59,7 +59,7 @@ jobs:
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     needs: build-base-apps
     with:
-      base_image: base-apps
+      base_image: base/apps
       base_tag: 1.16.1
       image: apps/terminal
       dockerfile: Dockerfile.terminal
@@ -73,7 +73,7 @@ jobs:
     uses: vladzaharia/kasm-images/.github/workflows/tmpl-docker-build-push.yml@main
     needs: build-base-apps
     with:
-      base_image: base-apps
+      base_image: base/apps
       base_tag: 1.16.1
       image: apps/vscode
       dockerfile: Dockerfile.vscode
