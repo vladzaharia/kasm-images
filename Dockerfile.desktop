@@ -33,6 +33,7 @@ RUN bash $TMP_SCRIPTS/vscode/install.sh
 
 # Install VPN
 RUN bash $TMP_SCRIPTS/vpn/install.sh
+COPY ./install/vpn/startup.sh $STARTUPDIR/start_vpn.sh
 
 # Install Zoom
 RUN bash $TMP_SCRIPTS/zoom/install.sh

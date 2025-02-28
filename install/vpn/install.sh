@@ -76,7 +76,3 @@ fi
 
 # Tweaks to wg-up
 sed -i '/cmd sysctl -q/d' $(which wg-quick)
-
-# Copy startup script
-cp ${INST_DIR}/vpn/startup.sh /dockerstartup/start_vpn.sh
-chmod +x /dockerstartup/start_vpn.sh
