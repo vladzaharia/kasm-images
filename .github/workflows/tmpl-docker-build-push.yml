@@ -7,10 +7,6 @@ on:
         description: Name of image to use as the base for this build
         required: true
         type: string
-      base_tag:
-        description: Tag of image to use as the base for this build
-        required: true
-        type: string
       image:
         description: Name of image to build and push
         required: true
@@ -78,7 +74,7 @@ jobs:
         run: 'mkdir private && echo "$SSH_PRIV_KEY" > private/id_rsa && echo "$SSH_PUB_KEY" > private/id_rsa.pub'
         shell: bash
 
-      - name: Pull ACR secrets from Vault
+      - name: Pull Docker secrets from Vault
         uses: hashicorp/vault-action@v2
         with:
           url: https://vault.zhr.one
@@ -87,9 +83,9 @@ jobs:
           method: jwt
           # jwtGithubAudience: sigstore
           secrets: |
-            /ci-cd/kasm-images/acr DOCKER_ENDPOINT ;
-            /ci-cd/kasm-images/acr DOCKER_USERNAME ;
-            /ci-cd/kasm-images/acr DOCKER_PASSWORD
+            /ci-cd/kasm-images/docker DOCKER_ENDPOINT ;
+            /ci-cd/kasm-images/docker DOCKER_USERNAME ;
+            /ci-cd/kasm-images/docker DOCKER_PASSWORD
 
       - name: Log into registry ${{ env.DOCKER_ENDPOINT }}
         if: github.event_name != 'pull_request'
